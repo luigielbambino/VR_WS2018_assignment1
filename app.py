@@ -1,5 +1,5 @@
 from builtins import range
-
+import math
 
 class TMatrix:
     # width = 4
@@ -49,9 +49,37 @@ def make_trans_mat(x, y, z):
 
 # def make_scale_mat(self, sx, sy, sz):
 
-matrix = [[1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [4, 8, 12, 16]]
-a = TMatrix(matrix)
-passed_matrix = [[1, 9, 2, 10], [3, 11, 4, 12], [5, 13, 6, 14], [7, 15, 8, 16]]
-TMatrix.mult(a, passed_matrix)
 
-make_trans_mat(1, 2, 3)
+class Vector4:
+    # Class to store 3D points in homogeneous coordinates
+    def __init__(self, x=0, y=0, z=0, w=1):
+        self.vector = [x, y, z, w]
+
+
+def euclidean_distance(p, v):
+    # Function to calculate euceldian distance between two given vectors
+    for i in range(len(p)):
+        p[i] = p[i]/p[len(p)-1]
+        v[i] = v[i]/v[len(p)-1]
+
+    distance = ((p[0]-v[0])**2 + (p[1]-v[1])**2 + (p[2]-v[2])**2)**.5
+    print("Euclidean distance between: " + str(p) + " and " + str(v) + ": " + str(distance))
+    return distance
+
+
+def main():
+    matrix = [[1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15], [4, 8, 12, 16]]
+    a = TMatrix(matrix)
+
+    passed_matrix = [[1, 9, 2, 10], [3, 11, 4, 12], [5, 13, 6, 14], [7, 15, 8, 16]]
+    TMatrix.mult(a, passed_matrix)
+
+    make_trans_mat(1, 2, 3)
+
+    v1 = Vector4(2, 4, 6, 2)
+    v2 = Vector4(0, 0, 0, 1)
+    ed = euclidean_distance(v1.vector, v2.vector)
+
+
+if __name__ == '__main__':
+    main()
