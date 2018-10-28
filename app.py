@@ -26,12 +26,11 @@ class TMatrix:
 
     # working on this feature
     def mult_vec(self, vector):
+        result = [0 for col in range(len(vector))]
         for i in range(len(self.matrix)):
             for j in range(len(vector)):
-                for k in range(len(vector)):
-                    # print(str(vector[k]) + " += " + str(self.matrix[k][i]) + " + " + str(vector[k]))
-                    vector[k] += self.matrix[k][i] + vector[k]
-        # print(vector)
+                result[i] += self.matrix[j][i] * vector[j]
+        print("A * v:" + str(result))
 
 
 def make_trans_mat(x, y, z):
@@ -161,9 +160,8 @@ class Vector4:
 
 def euclidean_distance(p, v):
     # Function to calculate euclidean distance between two given vectors
-    print("Euclidean distance: ")
-    distance = ((p[0] - v[0]) ** 2 + (p[1] - v[1]) ** 2 + (p[2] - v[2]) ** 2) ** .5
-    print(str(distance))
+    distance = ((p[0]-v[0])**2 + (p[1]-v[1])**2 + (p[2]-v[2])**2)**.5
+    print("Euclidean distance: " + str(distance))
     return distance
 
 
